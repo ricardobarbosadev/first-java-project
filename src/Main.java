@@ -18,11 +18,13 @@ public class Main {
 
         int optionChoosen = 0;
         while (optionChoosen != 4) {
-            System.out.println("Selecione a opção pretendida: " +
-                    " 1 - Consultar informação." +
-                    " 2 - Receber valor." +
-                    " 3 - Transferir valor." +
-                    " 4 - Sair.");
+            System.out.println("""
+                    Selecione a opção pretendida: 
+                    1 - Consultar informação.
+                    2 - Receber valor.
+                    3 - Transferir valor.
+                    4 - Sair.
+                    """);
 
 
             optionChoosen = scanner.nextInt();
@@ -40,13 +42,21 @@ public class Main {
                     System.out.println("Indique o valor a receber");
                     double inputValue = scanner.nextDouble();
                     balance += inputValue;
-                    System.out.println("Valor recebido: " + NumberFormat.getCurrencyInstance(localPortugal).format(inputValue) + " Saldo atual: " + NumberFormat.getCurrencyInstance(localPortugal).format(balance));
+                    System.out.println("Valor recebido: " + NumberFormat.getCurrencyInstance(localPortugal).format(inputValue) +
+                            " Saldo atual: " + NumberFormat.getCurrencyInstance(localPortugal).format(balance));
                     break;
                 case 3:
                     System.out.println("Indique o valor a transferir");
                     double outputValue = scanner.nextDouble();
-                    balance -= outputValue;
-                    System.out.println("Valor transferido: " + NumberFormat.getCurrencyInstance(localPortugal).format(outputValue) + " Saldo atual: " + NumberFormat.getCurrencyInstance(localPortugal).format(balance));
+                    if (outputValue > balance){
+                        System.out.println("Operação não autorizada.");
+                    }else {
+                        balance -= outputValue;
+                        System.out.println("Valor transferido: " +
+                                NumberFormat.getCurrencyInstance(localPortugal).format(outputValue) +
+                                " Saldo atual: " + NumberFormat.getCurrencyInstance(localPortugal).format(balance));
+                    }
+
                     break;
                 case 4:
                     System.out.println("A sair...");
